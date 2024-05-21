@@ -56,7 +56,7 @@ export default {
       const timer = this.timers[index];
       if (timer.running) {
         clearInterval(timer.intervalId);
-        timer.running = false;
+        console.log((timer.running = false));
       } else {
         timer.intervalId = setInterval(() => {
           timer.time += 10;
@@ -67,8 +67,8 @@ export default {
     },
     reset(index) {
       const timer = this.timers[index];
-      clearInterval(timer.indervalId);
-      timer.runnimg = false;
+      clearInterval(timer.intervalId);
+      timer.running = false;
       timer.time = 0;
       this.saveTimers();
     },
