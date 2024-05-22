@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-col v-for="(timer, index) in timers" :key="index.id">
+      <b-col v-for="(timer, index) in timers" :key="timer.id">
         <b-card>
           <b-card-title> stopWatch{{ index + 1 }} </b-card-title>
           <b-card-text>{{ formatTime(timer.time) }} </b-card-text>
@@ -44,19 +44,21 @@ export default {
       return `${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}`;
     },
     addTimer() {
+      const randomString = Math.random().toString(36).substring(2, 11);
       const newTimer = {
-        id: Date.now(),
+        id: Date.now() + randomString,
         time: 0,
         running: false,
-        indervalId: null,
+        intervalId: null,
       };
       this.timers.push(newTimer);
+      this.saveTimers();
     },
     startStop(index) {
       const timer = this.timers[index];
       if (timer.running) {
         clearInterval(timer.intervalId);
-        console.log((timer.running = false));
+        timer.running = false;
       } else {
         timer.intervalId = setInterval(() => {
           timer.time += 10;
@@ -64,6 +66,7 @@ export default {
         }, 10);
         timer.running = true;
       }
+      this.saveTimers();
     },
     reset(index) {
       const timer = this.timers[index];
@@ -83,12 +86,13 @@ export default {
     loadTimers() {
       const savedTimers = JSON.parse(localStorage.getItem("timers"));
       // Проверяем, были ли сохраненные данные
-      if (savedTimers != false) {
+      if (savedTimers && Array.isArray(savedTimers) && savedTimers.length > 0) {
         // Если данные были найдены (и не являются пустыми или null),
         // мы присваиваем их переменной this.timers, чтобы обновить состояние
         // массива таймеров в компоненте
         this.timers = savedTimers;
       } else {
+        this.timers = [];
         for (let i = 0; i < 3; i++) {
           this.addTimer();
         }
@@ -97,10 +101,13 @@ export default {
   },
   mounted() {
     this.loadTimers();
+    this.timers.forEach((timer) => {
+      timer.running = false; // Установка running в false для каждого таймера
+    });
     window.addEventListener("beforeunload", this.saveTimers);
   },
   beforeDestroy() {
-    this.saveTimers();
+    this.timers.forEach((timer) => clearInterval(timer.intervalId));
     window.removeEventListener("beforeunload", this.saveTimers); // Удаление обработчика события
   },
 };
