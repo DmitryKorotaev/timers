@@ -1,5 +1,7 @@
 <template>
-  <StopwatchV2 />
+  <div>
+    <StopwatchV2 />
+  </div>
 </template>
 
 <script>

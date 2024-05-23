@@ -33,7 +33,17 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     "bootstrap-vue/nuxt",
+    "@nuxtjs/google-fonts",
   ],
+  googleFonts: {
+    families: {
+      Anton: true,
+      Roboto: true,
+    },
+  },
+  bootstrapVue: {
+    icons: true,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
