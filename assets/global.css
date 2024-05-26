@@ -1,0 +1,149 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(to right, #ef6893, #7464f0);
+  background-size: 200% 200%;
+  animation: gradientAnimation 15s ease infinite;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  flex: 1;
+}
+.container-fluid {
+  padding: 2rem;
+  height: 100vh;
+}
+.col {
+  padding: 0px;
+}
+.card {
+  border-radius: 0.5rem;
+  width: auto;
+  margin: 1rem 0;
+  text-align: center;
+  background-color: transparent;
+  border: 3px solid rgba(255, 255, 255);
+}
+.b-button.transparent,
+.b-button.transparent:hover,
+.b-button.transparent:focus,
+.b-button.transparent:active {
+  background-color: transparent;
+  border: none;
+}
+.btn-secondary,
+.btn-secondary:focus,
+.btn.btn-secondary:active {
+  border: 2px solid rgba(255, 255, 255) !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+.btn-secondary:hover {
+  background-color: white !important;
+  color: purple;
+}
+.transparent-button {
+  padding: 1.5rem;
+}
+
+.rotate-on-hoverX.color {
+  color: white;
+}
+.timerTitle {
+  color: #444343;
+}
+h1,
+.timer,
+.timerLower {
+  color: white;
+  font-family: "Roboto";
+  font-weight: 200;
+}
+h1 {
+  text-align: center;
+}
+.timer {
+  flex-grow: 1;
+  white-space: nowrap;
+  font-size: 4.5rem;
+}
+/* .timerLower {
+  font-size: 4.5rem;
+} */
+.remove-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.addButton {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+.btn-secondary.btn-white {
+  background-color: white !important;
+  color: purple !important;
+}
+@media (max-width: 576px) {
+  h1 {
+    margin-top: 0.5rem;
+    font-size: 2rem;
+  }
+}
+@media (max-width: 720px) {
+  .container-fluid {
+    padding: 1rem;
+  }
+  .card {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1070px) {
+  .timer {
+    font-size: 3.5rem;
+  }
+}
+
+@keyframes rotateX {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes rotateRes {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.b-button:hover .rotate-on-hoverX {
+  animation: rotateX 0.2s linear;
+}
+.b-button:hover .rotate-on-hoverRes {
+  animation: rotateRes 0.2s linear;
+}
